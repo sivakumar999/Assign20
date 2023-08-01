@@ -9,89 +9,88 @@ namespace Assign20
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            Library mgmt = new Library();
+            Library library = new Library();
 
-            do
+            while (true)
             {
-                Console.WriteLine("Choose operation");
-                Console.WriteLine("1. Add Book\n2. View All Books\n3. Search by ID\n4. Search by Title\n5. Exit");
-                int op;
-                if (!int.TryParse(Console.ReadLine(), out op))
+                Console.WriteLine("Library Management System");
+                Console.WriteLine("1. Add a book");
+                Console.WriteLine("2. View all books");
+                Console.WriteLine("3. Search book by ID");
+                Console.WriteLine("4. Search book by title");
+                Console.WriteLine("5. Exit");
+                Console.Write("Enter your choice (1-5): ");
+                string input = Console.ReadLine();
+
+                switch (input)
                 {
-                    Console.WriteLine("Invalid input. Please enter a valid operation number.");
-                    continue;
-                }
+                    case "1":
+                        Console.Write("Enter Book ID: ");
+                        int bookId = int.Parse(Console.ReadLine());
 
-                switch (op)
-                {
-                    case 1:
+                        Console.Write("Enter Book Title: ");
+                        string title = Console.ReadLine();
+
+                        Console.Write("Enter Book Author: ");
+                        string author = Console.ReadLine();
+
+                        Console.Write("Enter Book Genre: ");
+                        string genre = Console.ReadLine();
+
+                        Book newBook = new Book(bookId, title, author, genre);
+                        library.AddBook(newBook);
+
+                        Console.WriteLine("Book added successfully!");
+                        Console.WriteLine();
+                        break;
+
+                    case "2":
+                        library.ViewAllBooks();
+                        break;
+
+                    case "3":
+                        Console.Write("Enter Book ID to search: ");
+                        int searchBookId = int.Parse(Console.ReadLine());
+                        var foundBookById = library.SearchBookById(searchBookId);
+                        if (foundBookById != null)
                         {
-                            Book newBook = new Book();
-                            Console.WriteLine("Enter Book ID");
-                            if (!int.TryParse(Console.ReadLine(), out int bookId))
-                            {
-                                Console.WriteLine("Invalid input. Book ID must be an integer.");
-                                continue;
-                            }
-                            newBook.BookId = bookId;
-
-                            Console.WriteLine("Enter Book Title");
-                            newBook.Title = Console.ReadLine();
-
-                            Console.WriteLine("Enter Book Author");
-                            newBook.Author = Console.ReadLine();
-
-                            Console.WriteLine("Enter Book Genre");
-                            newBook.Genre = Console.ReadLine();
-
-                            Console.WriteLine("Check Book Availability (true/false):");
-                            if (!bool.TryParse(Console.ReadLine(), out bool isAvailable))
-                            {
-                                Console.WriteLine("Invalid input. Is Available must be either 'true' or 'false'.");
-                                continue;
-                            }
-                            newBook.IsAvailable = isAvailable;
-
-                            mgmt.AddBook(newBook);
-                            break;
+                            Console.WriteLine($"Book found:");
+                            Console.WriteLine($"Book ID: {foundBookById.BookId}, Title: {foundBookById.Title}, Author: {foundBookById.Author}, Genre: {foundBookById.Genre}, IsAvailable: {(foundBookById.IsAvailable ? "Yes" : "No")}");
                         }
-                    case 2:
+                        else
                         {
-                            mgmt.ViewAllBooks();
-                            break;
+                            Console.WriteLine("Book not found with the given ID.");
                         }
-                    case 3:
+                        Console.WriteLine();
+                        break;
+
+                    case "4":
+                        Console.Write("Enter Book Title to search: ");
+                        string searchTitle = Console.ReadLine();
+                        var foundBookByTitle = library.SearchBookByTitle(searchTitle);
+                        if (foundBookByTitle != null)
                         {
-                            Console.WriteLine("Enter Book Id to search");
-                            if (!int.TryParse(Console.ReadLine(), out int bookID))
-                            {
-                                Console.WriteLine("Invalid input. Book ID must be an integer.");
-                                continue;
-                            }
-                            mgmt.SearchBookById(bookID);
-                            break;
+                            Console.WriteLine($"Book found:");
+                            Console.WriteLine($"Book ID: {foundBookByTitle.BookId}, Title: {foundBookByTitle.Title}, Author: {foundBookByTitle.Author}, Genre: {foundBookByTitle.Genre}, IsAvailable: {(foundBookByTitle.IsAvailable ? "Yes" : "No")}");
                         }
-                    case 4:
+                        else
                         {
-                            Console.WriteLine("Enter Book Title to search");
-                            string bookTitle = Console.ReadLine();
-                            mgmt.SearchBookByTitle(bookTitle);
-                            break;
+                            Console.WriteLine("Book not found with the given title.");
                         }
-                    case 5:
-                        {
-                            Console.WriteLine("Exiting the management system....");
-                            return;
-                        }
+                        Console.WriteLine();
+                        break;
+
+                    case "5":
+                        Console.WriteLine("Exiting Library Management System. Goodbye!");
+                        return;
+
                     default:
-                        {
-                            Console.WriteLine("Invalid operation was chosen, Please try again!");
-                            break;
-                        }
+                        Console.WriteLine("Invalid input. Please try again.");
+                        break;
                 }
-            } while (true);
+            }
         }
     }
 }

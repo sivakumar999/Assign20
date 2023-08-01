@@ -8,68 +8,47 @@ namespace LibraryFor20
 {
     public class Library
     {
-        List<Book> books;
+        /*books = new List<Book>()
+        {
+
+            new Book { BookId = 1, Title = "Gold D Roger", Author = "Eichiri Oda", Genre = "Shonen, Fantasy", IsAvailable=true },
+            new Book { BookId = 2, Title = "Attack on titan", Author = "Isagai", Genre = "History, Adventure", IsAvailable=true},
+            new Book { BookId = 3, Title = "Naruto Shippuden", Author = "Masashi Kishimoto", Genre = "Shonen, Adventure", IsAvailable=true },
+            new Book { BookId = 3, Title = "DeathNote", Author = "JRR Tolein", Genre = "Fantasy, Adventure", IsAvailable=true },
+            new Book { BookId = 4, Title = "", Author = "JRR Tolein", Genre = "Fantasy, Adventure", IsAvailable=true }
+        };*/
+
+        private List<Book> books;
+
         public Library()
         {
-            books = new List<Book>()
-            {
-                
-                new Book { BookId = 1, Title = "Gold D Roger", Author = "Eichiri Oda", Genre = "Shonen, Fantasy", IsAvailable=true },
-                new Book { BookId = 2, Title = "Attack on titan", Author = "Isagai", Genre = "History, Adventure", IsAvailable=true},
-                new Book { BookId = 3, Title = "Naruto Shippuden", Author = "Masashi Kishimoto", Genre = "Shonen, Adventure", IsAvailable=true },
-                new Book { BookId = 3, Title = "DeathNote", Author = "JRR Tolein", Genre = "Fantasy, Adventure", IsAvailable=true },
-                new Book { BookId = 4, Title = "", Author = "JRR Tolein", Genre = "Fantasy, Adventure", IsAvailable=true }
-            };
+            books = new List<Book>();
         }
+
         public void AddBook(Book book)
         {
             books.Add(book);
-            this.ViewAllBooks();
         }
+
         public void ViewAllBooks()
         {
-            foreach (Book book in books)
+            Console.WriteLine("All Books in the Library:");
+            foreach (var book in books)
             {
-                Console.WriteLine($"Book ID: \t{book.BookId}");
-                Console.WriteLine($"Book Title: \t{book.Title}");
-                Console.WriteLine($"Book Author: \t{book.Author}");
-                Console.WriteLine($"Book Genre: \t{book.Genre}");
-                Console.WriteLine($"Book is available: \t{book.IsAvailable}");
-                Console.WriteLine();
+                Console.WriteLine($"Book ID: {book.BookId}, Title: {book.Title}, Author: {book.Author}, Genre: {book.Genre}, IsAvailable: {(book.IsAvailable ? "Yes" : "No")}");
             }
+            Console.WriteLine();
         }
-        public void SearchBookById(int bookId)
+
+        public Book SearchBookById(int bookId)
         {
-            var book = books.Find(b => b.BookId == bookId);
-            if (book != null)
-            {
-                Console.WriteLine($"Book ID: \t{book.BookId}");
-                Console.WriteLine($"Book Title: \t{book.Title}");
-                Console.WriteLine($"Book Author: \t{book.Author}");
-                Console.WriteLine($"Book Genre: \t{book.Genre}");
-                Console.WriteLine($"Book is available: \t{book.IsAvailable}");
-                Console.WriteLine();
-            }
-            else
-            {
-                Console.WriteLine("Book Not Found");
-            }
+            return books.Find(b => b.BookId == bookId);
         }
-        public void SearchBookByTitle(string title)
+
+        public Book SearchBookByTitle(string title)
         {
-            var book = books.Find(b => b.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
-            if (book != null)
-            {
-                Console.WriteLine($"Book ID: \t{book.BookId}");
-                Console.WriteLine($"Book Title: \t{book.Title}");
-                Console.WriteLine($"Book Author: \t{book.Author}");
-                Console.WriteLine($"Book Genre: \t{book.Genre}");
-                Console.WriteLine($"Book is available: \t{book.IsAvailable}");
-            }
-            else
-            {
-                Console.WriteLine("Book Not Found");
-            }
+            return books.Find(b => b.Title.ToLower().Contains(title.ToLower()));
         }
+
     }
 }
