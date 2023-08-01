@@ -1,0 +1,6 @@
+M:\Simplilearn\mphasis\day17\LibraryFor20\LibraryFor20\bin\Debug\LibraryFor20.dll
+M:\Simplilearn\mphasis\day17\LibraryFor20\LibraryFor20\bin\Debug\LibraryFor20.pdb
+M:\Simplilearn\mphasis\day17\LibraryFor20\LibraryFor20\obj\Debug\LibraryFor20.csproj.AssemblyReference.cache
+M:\Simplilearn\mphasis\day17\LibraryFor20\LibraryFor20\obj\Debug\LibraryFor20.csproj.CoreCompileInputs.cache
+M:\Simplilearn\mphasis\day17\LibraryFor20\LibraryFor20\obj\Debug\LibraryFor20.dll
+M:\Simplilearn\mphasis\day17\LibraryFor20\LibraryFor20\obj\Debug\LibraryFor20.pdb
